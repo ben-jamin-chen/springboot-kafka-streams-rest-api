@@ -1,6 +1,6 @@
 # Sample Spring Boot (2.3.1) RESTful API with Kafka Stream (2.5.0)
 
-While searching through GitHub for some boilerplate code on how to setup a Spring Boot API project with Kafka Stream, I found it quite difficult to find a working example with a more recent version of Spring Boot and Java (i.e. 14). Anyways, I thought I’d create my own and share with everyone. This is for anyone that needs some quick boilerplate code to setup their new API project with Kafka Stream.
+While looking through the Kafka Tutorials to see how I could setup a Spring Boot API project with Kafka Stream, I found it strange that there wasn't a complete or more informative example on how this could be achieved. Most use cases demonstrated how to compute aggregations and how to build simple topologies, but it was difficult to find a concrete example on how to build an API service that could query into these materialized name stores. Anyways, I thought I’d create my own using a more recent version of Spring Boot with Java 14.
 
 ## What You Need
 
@@ -9,11 +9,13 @@ While searching through GitHub for some boilerplate code on how to setup a Sprin
 * Docker 19+
 
 ## Initialize the project topics and data
-To get started, we need to first launch the Confluent services (i.e. Schema Registry, Brokers, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications.
+To get started, we need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack.
 
 > Note: You can run `docker-compose down` to stop it.
 
-As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html) into this project. The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result. 
+As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html) into this project. The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result.
+
+Notice in the project's `src/main/avro` directory, we have all our Avro schema files for the stream of `ratings` and`countsum`. For your convenience, the classes were already generated under the `src/main/java/io/confluent/demo` directory, but feel free to tinker with them and recompile the schemas if needed. The Avro classes can be programmatically generated using `Maven` or by manually invoking the [schema compiler](https://avro.apache.org/docs/1.10.0/gettingstartedjava.html#Compiling+the+schema). 
 
 So before building and running the project, open a new terminal and run the following commands to generate your input and output topics.
 
