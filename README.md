@@ -13,7 +13,7 @@ To get started, we need to first launch the Confluent services (i.e. Schema Regi
 
 > Note: You can run `docker-compose down` to stop it.
 
-As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html). The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result. 
+As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html) into this project. The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result. 
 
 So before building and running the project, open a new terminal and run the following commands to generate your input and output topics.
 
@@ -34,7 +34,7 @@ $  docker exec -i schema-registry /usr/bin/kafka-avro-console-producer --topic r
     --property value.schema="$(< src/main/avro/rating.avsc)"
  ```
  
-Paste in the following `json` data when promoted and be sure to press enter twice to actually submit it.
+Paste in the following `json` data when prompted and be sure to press enter twice to actually submit it.
 
 ```json
 {"movie_id":362,"rating":10}
@@ -58,7 +58,7 @@ You can import the code straight into your preferred IDE or run the sample using
 ```bash
 $  mvn spring-boot:run
 ```
-After the application runs, navigate to `http://localhost:7001/swagger-ui/index.html?configUrl=/api-docs/swagger-config` in your web browser to access the Swagger UI. If you used the same sample data from above, you can enter `362` as the movieId and it should return something similar like this below.
+After the application runs, navigate to `http://localhost:7001/swagger-ui/index.html?configUrl=/api-docs/swagger-config` in your web browser to access the Swagger UI. If you used the same sample data from above, you can enter `362` as the `movieId` and it should return something similar like this below:
 
 ```json
 {
