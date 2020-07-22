@@ -1,6 +1,6 @@
 # Sample Spring Boot (2.3.1) RESTful API with Kafka Stream (2.5.0)
 
-While searching through GitHub for some boilerplate code on how to setup a Spring Boot API project with Kafka Stream, I found it quite difficult to find a working example with a more recent version of Spring Boot and Java (i.e. 14). Anyways, I thought I’d create my own and share with everyone. This is for anyone that needs some quick boilerplate code to setup their new API project.
+While searching through GitHub for some boilerplate code on how to setup a Spring Boot API project with Kafka Stream, I found it quite difficult to find a working example with a more recent version of Spring Boot and Java (i.e. 14). Anyways, I thought I’d create my own and share with everyone. This is for anyone that needs some quick boilerplate code to setup their new API project with Kafka Stream.
 
 ## What You Need
 
