@@ -9,7 +9,7 @@ While searching through GitHub for some boilerplate code on how to setup a Sprin
 * Docker 19+
 
 ## Initialize the project topics and data
-To get started, we need to first launch the Confluent services (i.e Schema Registry, Brokers, zookeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications.
+To get started, we need to first launch the Confluent services (i.e Schema Registry, Brokers, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications.
 
 > Note: You can run `docker-compose down` to stop it.
 
