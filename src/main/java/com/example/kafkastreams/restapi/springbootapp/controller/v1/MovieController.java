@@ -40,7 +40,7 @@ public class MovieController {
     @Value("${state.store.name}")
     private String stateStoreName;
 
-    @Operation(summary = "Returns a greeting message")
+    @Operation(summary = "Returns the average rating for a particular movie")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(type = "object"))) })
     @GetMapping(value = "/rating", produces = { "application/json" })
