@@ -43,7 +43,7 @@ public class MovieController {
     @Operation(summary = "Returns the average rating for a particular movie")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(type = "object"))) })
-    @GetMapping(value = "/rating", produces = { "application/json" })
+    @GetMapping(value = "v1/rating", produces = { "application/json" })
     public MovieAverageRatingResponse getMovieAverageRating(@RequestParam Long movieId) {
         try {
             final KeyQueryMetadata keyQueryMetadata = streams.queryMetadataForKey(stateStoreName, movieId, Serdes.Long().serializer());
