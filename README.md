@@ -8,7 +8,7 @@ While looking through the Kafka Tutorials to see how I could setup a Spring Boot
 * Maven 3.2+
 * Docker 19+
 
-## Initialize the project topics and data
+## Getting Started
 To get started, we need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack.
 
 > Note: You can run `docker-compose down` to stop it.
@@ -53,7 +53,7 @@ $  docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-average
     --from-beginning
 ```
 
-## Build and run the sample
+## Build and Run the Sample
 
 You can import the code straight into your preferred IDE or run the sample using the following command (in the root project folder).
 
