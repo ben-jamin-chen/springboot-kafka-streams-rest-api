@@ -15,7 +15,7 @@ To get started, we need to first launch the Confluent services (i.e. Schema Regi
 
 As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html). The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result. 
 
-So open a new terminal and run the following commands to generate your input and output topics.
+So before building and running the project, open a new terminal and run the following commands to generate your input and output topics.
 
 ```bash
 $  docker-compose exec broker kafka-topics --create --bootstrap-server \
@@ -41,7 +41,7 @@ Paste in the following `json` data when promoted and be sure to press enter twic
 {"movie_id":362,"rating":8}
  ```
 
-Optionally, you can also see the consumer results on the output topic by running this command:
+Optionally, you can also see the consumer results on the output topic by running this command on a separate terminal window:
 
 ```bash
 $  docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-averages --bootstrap-server broker:9092 \
