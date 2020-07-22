@@ -41,7 +41,7 @@ Paste in the following `json` data when promoted and be sure to press enter twic
 {"movie_id":362,"rating":8}
  ```
 
-Optionally, you can also see the consumer results on the output topic by running this command on a separate terminal window:
+Optionally, you can also see the consumer results on the output topic by running this command on a new terminal window:
 
 ```bash
 $  docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-averages --bootstrap-server broker:9092 \
@@ -63,6 +63,6 @@ After the application runs, navigate to `http://localhost:7001/swagger-ui/index.
 ```json
 {
   "movieId": 362,
-  "rating": 10.0
+  "rating": 9.0
 }
 ```
