@@ -22,12 +22,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @OpenAPIDefinition(servers = { @Server(url = "http://localhost:7001") }, info = @Info(title = "Sample Spring Boot Kafka Stream API", version = "v1", description = "A demo project using Spring Boot with Kafka Stream", license = @License(name = "MIT License", url = "https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/LICENSE"), contact = @Contact(url = "https://www.linkedin.com/in/bchen04/", name = "Ben Chen")))
 @RestController
+@RequestMapping("v1/movie")
 public class MovieController {
     private final KafkaStreams streams;
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
@@ -43,8 +42,8 @@ public class MovieController {
     @Operation(summary = "Returns the average rating for a particular movie")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(type = "object"))) })
-    @GetMapping(value = "/v1/rating", produces = { "application/json" })
-    public MovieAverageRatingResponse getMovieAverageRating(@RequestParam Long movieId) {
+    @GetMapping(value = "{movieId}/rating", produces = { "application/json" })
+    public MovieAverageRatingResponse getMovieAverageRating(@PathVariable Long movieId) {
         try {
             final KeyQueryMetadata keyQueryMetadata = streams.queryMetadataForKey(stateStoreName, movieId, Serdes.Long().serializer());
 
