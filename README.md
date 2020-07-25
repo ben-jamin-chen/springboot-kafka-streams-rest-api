@@ -1,4 +1,4 @@
-# Sample Spring Boot (2.3.1) RESTful API with Kafka Stream (2.5.0)
+# Spring Boot (2.3.1) RESTful API with Kafka Stream (2.5.0)
 
 While looking through the Kafka Tutorials to see how I could setup a Spring Boot API project with Kafka Stream, I found it strange that there wasn't a complete or more informative example on how this could be achieved. Most use cases demonstrated how to compute aggregations and how to build simple topologies, but it was difficult to find a concrete example on how to build an API service that could query into these materialized name stores. Anyways, I thought I’d create my own using a more recent version of Spring Boot with Java 14.
 
@@ -15,7 +15,7 @@ We need to first launch the Confluent services (i.e. Schema Registry, Broker, Zo
 
 As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html) into this project. The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result.
 
-Notice in the project's `src/main/avro` directory, we have all our Avro schema files for the stream of `ratings` and`countsum`. For your convenience, the classes were already generated under the `src/main/java/io/confluent/demo` directory, but feel free to tinker with them and recompile the schemas if needed. The Avro classes can be programmatically generated using `Maven` or by manually invoking the [schema compiler](https://avro.apache.org/docs/1.10.0/gettingstartedjava.html#Compiling+the+schema). 
+Notice in the `src/main/avro` directory, we have all our Avro schema files for the stream of `ratings` and `countsum`. For your convenience, the classes were already generated under the `src/main/java/io/confluent/demo` directory, but feel free to tinker with them and recompile the schemas if needed. The Avro classes can be programmatically generated using `Maven` or by manually invoking the [schema compiler](https://avro.apache.org/docs/1.10.0/gettingstartedjava.html#Compiling+the+schema). 
 
 So before building and running the project, open a new terminal and run the following commands to generate your input and output topics.
 
