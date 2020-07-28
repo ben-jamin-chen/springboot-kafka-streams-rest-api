@@ -11,11 +11,11 @@ While looking through the Kafka Tutorials to see how I could setup a Spring Boot
 ## Getting Started
 We need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack. Notice, the endpoints from within the containers on your host machine.
 
-`| Name | From within containers | From host machine |
+| Name | From within containers | From host machine |
 | ------------- | ------------- | ------------- |
 | Kafka Broker | broker:9092 | localhost:9092 |
 | Schema Registry  | http://schema-registry:8081 | http://localhost:8081 |
-| ZooKeeper | zookeeper:2181 | localhost:2181 |`
+| ZooKeeper | zookeeper:2181 | localhost:2181 |
 
 > Note: You can run `docker-compose down` to stop all services and containers.
 
