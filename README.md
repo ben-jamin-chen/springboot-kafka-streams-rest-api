@@ -9,9 +9,15 @@ While looking through the Kafka Tutorials to see how I could setup a Spring Boot
 * Docker 19+
 
 ## Getting Started
-We need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack.
+We need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack. Notice, the endpoints from within the containers on your host machine.
 
-> Note: You can run `docker-compose down` to stop it.
+| Name | Endpoint |
+| ------------- | ------------- |
+| Kafka Broker | localhost:29092 |
+| Schema Registry | localhost:8081 |
+| ZooKeeper | localhost:2181 |
+
+> Note: You can run `docker-compose down` to stop all services and containers.
 
 As part of this sample, I've retrofitted the average aggregate example from [Confluent's Kafka Tutorials](https://kafka-tutorials.confluent.io/aggregating-average/kstreams.html) into this project. The API will calculate and return a running average rating for a given movie identifier. This should demonstrate how to build a basic API service on top of an aggregation result.
 
