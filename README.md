@@ -1,11 +1,11 @@
-# Spring Boot (2.3.1) RESTful API with Kafka Stream (2.5.0)
+# Spring Boot (2.3.2) RESTful API with Kafka Stream (2.5.0)
 
 While looking through the Kafka Tutorials to see how I could setup a Spring Boot API project with Kafka Stream, I found it strange that there wasn't a complete or more informative example on how this could be achieved. Most use cases demonstrated how to compute aggregations and how to build simple topologies, but it was difficult to find a concrete example on how to build an API service that could query into these materialized name stores. Anyways, I thought I’d create my own using a more recent version of Spring Boot with Java 14.
 
 ## What You Need
 
 * Java 14
-* Maven 3.2+
+* Maven 3.6.0+
 * Docker 19+
 
 ## Getting Started
@@ -19,7 +19,7 @@ Notice in the `src/main/avro` directory, we have all our Avro schema files for t
 
 So before building and running the project, open a new terminal and run the following commands to generate your input and output topics.
 
-```bash
+```zsh
 $  docker-compose exec broker kafka-topics --create --bootstrap-server \
    localhost:9092 --replication-factor 1 --partitions 1 --topic ratings
 
@@ -29,7 +29,7 @@ $  docker-compose exec broker kafka-topics --create --bootstrap-server \
 
 Next, we will need to produce some data onto the input topic.
 
-```bash
+```zsh
 $  docker exec -i schema-registry /usr/bin/kafka-avro-console-producer --topic ratings --broker-list broker:9092\
     --property "parse.key=false"\
     --property "key.separator=:"\
@@ -45,7 +45,7 @@ Paste in the following `json` data when prompted and be sure to press enter twic
 
 Optionally, you can also see the consumer results on the output topic by running this command on a new terminal window:
 
-```bash
+```zsh
 $  docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-averages --bootstrap-server broker:9092 \
     --property "print.key=true"\
     --property "key.deserializer=org.apache.kafka.common.serialization.LongDeserializer" \
@@ -57,7 +57,7 @@ $  docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-average
 
 You can import the code straight into your preferred IDE or run the sample using the following command (in the root project folder).
 
-```bash
+```zsh
 $  mvn spring-boot:run
 ```
 After the application runs, navigate to `http://localhost:7001/swagger-ui/index.html?configUrl=/api-docs/swagger-config` in your web browser to access the Swagger UI. If you used the same sample data from above, you can enter `362` as the `movieId` and it should return something similar like this below:
