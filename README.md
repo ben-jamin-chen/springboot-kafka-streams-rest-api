@@ -74,3 +74,5 @@ After the application runs, navigate to `http://localhost:7001/swagger-ui/index.
   "rating": 9.0
 }
 ```
+
+> Note: remember to keep in mind the various [states](https://kafka.apache.org/25/javadoc/org/apache/kafka/streams/KafkaStreams.State.html) of the client. When a `KafkaStreams` instance is `RUNNING` state, it allows for inspection of the stream's metadata using methods like `metadataForKey`. While it is in `REBALANCING` state, the REST service cannot immediately answer requests.
