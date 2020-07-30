@@ -66,7 +66,7 @@ You can import the code straight into your preferred IDE or run the sample using
 ```zsh
 $  mvn spring-boot:run
 ```
-After the application runs, navigate to `http://localhost:7001/swagger-ui/index.html?configUrl=/api-docs/swagger-config` in your web browser to access the Swagger UI. If you used the same sample data from above, you can enter `362` as the `movieId` and it should return something similar like this below:
+After the application runs, navigate to [http://localhost:7001/swagger-ui/index.html?configUrl=/api-docs/swagger-config](http://localhost:7001/swagger-ui/index.html?configUrl=/api-docs/swagger-config) in your web browser to access the Swagger UI. If you used the same sample data from above, you can enter `362` as the `movieId` and it should return something similar like this below:
 
 ```json
 {
