@@ -76,3 +76,8 @@ After the application runs, navigate to [http://localhost:7001/swagger-ui/index.
 ```
 
 > Note: remember to keep in mind the various [states](https://kafka.apache.org/25/javadoc/org/apache/kafka/streams/KafkaStreams.State.html) of the client. When a `KafkaStreams` instance is `RUNNING` state, it allows for inspection of the stream's metadata using methods like `metadataForKey`. While it is in `REBALANCING` state, the REST service cannot immediately answer requests.
+
+
+## Troubleshooting
+
+* In certain conditions, you may need to do a complete application reset. You can delete the application’s local state directory where the application instance was run. In this project, Kafka Streams persists local states under the `~/data` folder.
