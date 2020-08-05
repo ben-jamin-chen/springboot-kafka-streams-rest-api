@@ -46,18 +46,22 @@ public class MovieController {
     @GetMapping(value = "{movieId}/rating", produces = { "application/json" })
     public MovieAverageRatingResponse getMovieAverageRating(@Parameter(required = true, example = "362") @PathVariable Long movieId) {
         try {
+            //find active, standby host list and partition for key
             final KeyQueryMetadata keyQueryMetadata = streams.queryMetadataForKey(stateStoreName, movieId, Serdes.Long().serializer());
 
+            //use the above information to redirect the query to the host containing the partition for the key
             final int keyPartition = keyQueryMetadata.getPartition();
 
+            //querying local key-value stores
             final QueryableStoreType<ReadOnlyKeyValueStore<Long, Double>> queryableStoreType = QueryableStoreTypes.keyValueStore();
 
-            //fetch the store for specific partition “keyPartition” where the key belongs and look into stale stores as well
+            //fetch the store for specific partition where the key belongs and look into stale stores as well
             ReadOnlyKeyValueStore<Long, Double> store = streams
                     .store(StoreQueryParameters.fromNameAndType(stateStoreName, queryableStoreType)
                             .enableStaleStores()
                             .withPartition(keyPartition));
 
+            //get the value by key
             Double result = store.get(movieId);
 
             return new MovieAverageRatingResponse(movieId, result);
