@@ -9,7 +9,7 @@ While looking through the Kafka Tutorials to see how I could setup a Spring Boot
 * Docker 19+
 
 ## Getting Started
-We need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command on the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack. Notice, the endpoints from within the containers on your host machine.
+We need to first launch the Confluent services (i.e. Schema Registry, Broker, ZooKeeper) locally by running the `docker-compose up -d` CLI command where the [docker-compose.yml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/docker-compose.yml) file is. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker-compose ps` to check the status of the stack. Notice, the endpoints from within the containers on your host machine.
 
 | Name | From within containers | From host machine |
 | ------------- | ------------- | ------------- |
@@ -75,7 +75,7 @@ After the application runs, navigate to [http://localhost:7001/swagger-ui/index.
 }
 ```
 
-> Note: keep in mind the various [states](https://kafka.apache.org/25/javadoc/org/apache/kafka/streams/KafkaStreams.State.html) of the client. When a Kafka Streams instance is `RUNNING` state, it allows for inspection of the stream's metadata using methods like `queryMetadataForKey()`. While it is in `REBALANCING` state, the REST service cannot immediately answer requests.
+> Note: keep in mind the various [states](https://kafka.apache.org/25/javadoc/org/apache/kafka/streams/KafkaStreams.State.html) of the client. When a Kafka Streams instance is in `RUNNING` state, it allows for inspection of the stream's metadata using methods like `queryMetadataForKey()`. While it is in `REBALANCING` state, the REST service cannot immediately answer requests until the state stores are fully rebuilt.
 
 ## Troubleshooting
 
