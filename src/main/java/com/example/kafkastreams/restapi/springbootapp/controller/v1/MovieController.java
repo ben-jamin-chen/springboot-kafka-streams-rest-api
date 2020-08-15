@@ -23,9 +23,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@OpenAPIDefinition(servers = { @Server(url = "http://localhost:7001") }, info = @Info(title = "Sample Spring Boot Kafka Stream API", version = "v1", description = "A demo project using Spring Boot with Kafka Stream", license = @License(name = "MIT License", url = "https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/LICENSE"), contact = @Contact(url = "https://www.linkedin.com/in/bchen04/", name = "Ben Chen")))
+@OpenAPIDefinition(servers = { @Server(url = "http://localhost:7001") }, info = @Info(title = "Sample Spring Boot Kafka Stream API", version = "v1", description = "A demo project using Spring Boot with Kafka Streams.", license = @License(name = "MIT License", url = "https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/LICENSE"), contact = @Contact(url = "https://www.linkedin.com/in/bchen04/", name = "Ben Chen")))
 @RestController
 @RequestMapping("v1/movie")
 public class MovieController {
@@ -42,11 +44,13 @@ public class MovieController {
 
     @Operation(summary = "Returns the average rating for a particular movie")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(type = "object"))) })
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(type = "object"))),
+            @ApiResponse(responseCode = "500", description = "internal server error")})
     @GetMapping(value = "{movieId}/rating", produces = { "application/json" })
-    public MovieAverageRatingResponse getMovieAverageRating(@Parameter(required = true, example = "362") @PathVariable Long movieId) {
+    public ResponseEntity<MovieAverageRatingResponse> getMovieAverageRating(@Parameter(description = "Movie identifier", required = true, example = "362") @PathVariable Long movieId) {
         try {
             //find active, standby host list and partition for key
+            //get the metadata related to the key.
             final KeyQueryMetadata keyQueryMetadata = streams.queryMetadataForKey(stateStoreName, movieId, Serdes.Long().serializer());
 
             //use the above information to redirect the query to the host containing the partition for the key
@@ -64,11 +68,16 @@ public class MovieController {
             //get the value by key
             Double result = store.get(movieId);
 
-            return new MovieAverageRatingResponse(movieId, result);
+            return ResponseEntity
+                    .ok()
+                    .body(new MovieAverageRatingResponse(movieId, result));
         }
         catch(Exception ex) {
             logger.error("Failed due to exception: {}", ex.getMessage());
-            return null;
+
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .build();
         }
     }
 }
