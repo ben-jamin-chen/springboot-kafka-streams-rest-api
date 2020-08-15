@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.2.RELEASE</version>
+		<version>2.3.3.RELEASE</version>
 		<relativePath/>
 	</parent>
 	<groupId>com.example.kafkastreams.restapi</groupId>
@@ -23,7 +23,7 @@
 	<properties>
 		<java.version>14</java.version>
 		<avro.version>1.10.0</avro.version>
-		<kafka.version>2.5.0</kafka.version>
+		<kafka.version>2.6.0</kafka.version>
 		<openapi.version>1.4.3</openapi.version>
 	</properties>
 	<dependencies>
