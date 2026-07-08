@@ -1,0 +1,23 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: springboot-kafka-streams-rest-api
+
+app:
+  kafka:
+    bootstrap-servers: localhost:29092
+    schema-registry-url: http://localhost:8081
+    application-id: springboot-kafka-streams-rest-api
+    application-server: localhost:7001
+    rating-topic: ratings
+    average-rating-topic: rating-averages
+    state-store: average-ratings
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    operations-sorter: method
+    disable-swagger-default-url: true
