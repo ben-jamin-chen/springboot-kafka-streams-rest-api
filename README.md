@@ -25,20 +25,20 @@ Notice in the `~/src/main/avro` directory, we have all our Avro schema files for
 So before building and running the project, open a new terminal and run the following commands to generate your input and output topics.
 
 ```zsh
-$  docker compose exec broker kafka-topics --create --bootstrap-server \
-   broker:9092 --replication-factor 1 --partitions 1 --topic ratings
+docker compose exec broker kafka-topics --create --bootstrap-server \
+broker:9092 --replication-factor 1 --partitions 1 --topic ratings
 
-$  docker compose exec broker kafka-topics --create --bootstrap-server \
-   broker:9092 --replication-factor 1 --partitions 1 --topic rating-averages
+docker compose exec broker kafka-topics --create --bootstrap-server \
+broker:9092 --replication-factor 1 --partitions 1 --topic rating-averages
 ```
 
 Next, we will need to produce some data onto the input topic.
 
 ```zsh
-$  docker exec -i schema-registry /usr/bin/kafka-avro-console-producer --topic ratings --bootstrap-server broker:9092\
-    --property "parse.key=false"\
-    --property "key.separator=:"\
-    --property value.schema="$(< src/main/avro/rating.avsc)"
+docker exec -i schema-registry /usr/bin/kafka-avro-console-producer --topic ratings --bootstrap-server broker:9092\
+ --property "parse.key=false"\
+ --property "key.separator=:"\
+ --property value.schema="$(< src/main/avro/rating.avsc)"
  ```
 
 Paste in the following `json` data when prompted and be sure to press enter twice to actually submit it.
@@ -51,11 +51,11 @@ Paste in the following `json` data when prompted and be sure to press enter twic
 Optionally, you can also see the consumer results on the output topic by running this command on a new terminal window:
 
 ```zsh
-$  docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-averages --bootstrap-server broker:9092 \
-    --property "print.key=true"\
-    --property "key.deserializer=org.apache.kafka.common.serialization.LongDeserializer" \
-    --property "value.deserializer=org.apache.kafka.common.serialization.DoubleDeserializer" \
-    --from-beginning
+docker exec -it broker /usr/bin/kafka-console-consumer --topic rating-averages --bootstrap-server broker:9092 \
+ --property "print.key=true"\
+ --property "key.deserializer=org.apache.kafka.common.serialization.LongDeserializer" \
+ --property "value.deserializer=org.apache.kafka.common.serialization.DoubleDeserializer" \
+ --from-beginning
 ```
 
 ## Project Structure
@@ -86,7 +86,7 @@ src/main/java/com/example/app/
 You can import the code straight into your preferred IDE or run the sample using the following command (in the root project folder).
 
 ```zsh
-$  ./mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
 After the application runs, navigate to [http://localhost:7001/swagger-ui/index.html](http://localhost:7001/swagger-ui/index.html) in your web browser to access the Swagger UI. If you used the same sample data from above, you can enter `362` as the `movieId` and it should return something similar like this below:
 
@@ -100,12 +100,12 @@ After the application runs, navigate to [http://localhost:7001/swagger-ui/index.
 You can also build and run it as a container (multi-stage `Dockerfile` included):
 
 ```zsh
-$  docker build -t springboot-kafka-streams-rest-api .
+docker build -t springboot-kafka-streams-rest-api .
 
-$  docker run --rm -p 7001:7001 --network cp_network \
-     -e APP_KAFKA_BOOTSTRAP_SERVERS=broker:9092 \
-     -e APP_KAFKA_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
-     springboot-kafka-streams-rest-api
+docker run --rm -p 7001:7001 --network cp_network \
+ -e APP_KAFKA_BOOTSTRAP_SERVERS=broker:9092 \
+ -e APP_KAFKA_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
+ springboot-kafka-streams-rest-api
 ```
 
 > Note: keep in mind the various [states](https://kafka.apache.org/43/javadoc/org/apache/kafka/streams/KafkaStreams.State.html) of the client. When a Kafka Streams instance is in `RUNNING` state, it allows for inspection of the stream's metadata using methods like `queryMetadataForKey()`. While it is in `REBALANCING` state, the REST service cannot immediately answer requests until the state stores are fully rebuilt.
