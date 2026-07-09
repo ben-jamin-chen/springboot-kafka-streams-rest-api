@@ -9,7 +9,7 @@ While looking through the Kafka Tutorials to see how I could setup a Spring Boot
 * Docker 19+
 
 ## Getting Started
-We need to first launch the Confluent services (i.e. Schema Registry and a KRaft-mode Kafka broker — no ZooKeeper required anymore) locally by running the `docker compose up -d` CLI command where the [compose.yaml](https://github.com/bchen04/springboot-kafka-streams-rest-api/blob/master/compose.yaml) file is. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker compose ps` to check the status of the stack. Notice, the endpoints from within the containers on your host machine.
+We need to first launch the Confluent services (i.e. Schema Registry and a KRaft-mode Kafka broker — no ZooKeeper required anymore) locally by running the `docker compose up -d` CLI command where the [compose.yaml](https://github.com/ben-jamin-chen/springboot-kafka-streams-rest-api/blob/main/compose.yaml) file is. Typically, you can create a stack file (in the form of a YAML file) to define your applications. You can also run `docker compose ps` to check the status of the stack. Notice, the endpoints from within the containers on your host machine.
 
 | Name | From within containers | From host machine |
 | ------------- | ------------- | ------------- |
