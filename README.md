@@ -1,4 +1,4 @@
-# Spring Boot (4.1) RESTful API with Kafka Streams (4.3)
+# Spring Boot (4.1.0) RESTful API with Kafka Streams (4.3.1)
 
 While looking through the Kafka Tutorials to see how I could setup a Spring Boot API project with Kafka Streams, I found it strange that there wasn't a complete or more informative example on how this could be achieved. Most use cases demonstrated how to compute aggregations and how to build simple topologies, but it was difficult to find a concrete example on how to build an API service that could query into these materialized name stores. Anyways, I thought I’d create my own using a more recent version of Spring Boot with Java 25.
 
